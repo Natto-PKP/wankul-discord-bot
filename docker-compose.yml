@@ -1,0 +1,11 @@
+version: '3.8'
+
+services:
+  node:
+    image: node:16
+    container_name: discord-sucrose-typescript-template
+    restart: always
+    working_dir: /src/discord-sucrose-typescript-template
+    volumes:
+      - ./:/src/discord-sucrose-typescript-template
+    command: bash -c "npm config set cache /tmp --global && npm i --production=false && npm run build && node dist/index.js"
