@@ -5,7 +5,7 @@
 
   "overrides": [
     {
-      "files": ["src/**/*.ts", "src/**/*.d.ts", "typings/**/*.d.ts"],
+      "files": ["src/**/*.ts", "typings/**/*.d.ts"],
       "env": { "node": true },
       "plugins": ["@typescript-eslint"],
       "extends": ["airbnb-base", "airbnb-typescript/base"],
@@ -15,10 +15,9 @@
         "sourceType": "module",
         "project": "tsconfig.json"
       },
-      "rules": {
-        "import/no-cycle": 0,
-        "no-restricted-syntax": "off",
-        "linebreak-style": ["error", "windows"]
+      "rules": { 
+        "import/no-cycle": [0, { "maxDepth": 1 }],
+        "linebreak-style": "off"
       }
     }
   ]
