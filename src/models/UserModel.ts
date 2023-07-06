@@ -8,15 +8,17 @@ import {
   Unique,
 } from 'sequelize-typescript';
 import { CoreModelInterface, CoreModel } from './CoreModel';
-import IdentifierService from '../utils/Identifier.util';
+import IdentifierService from '../utils/IdentifierUtil';
 import { MatchModel, UserMatchModel } from '.';
 
-type UserType = 'collector' | 'player';
+export enum UserType {
+  Collector = 'COLLECTOR',
+  Player = 'PLAYER',
+}
 
 export type UserData = {
   identifier: string;
   discordId: string; // # Discord ID
-  type: UserType; // # Collector or Player
 
   // # Leveling
   level: number;
@@ -48,10 +50,6 @@ export class UserModel extends CoreModel implements UserModelInterface {
   @AllowNull(false)
   @Column({ type: DataType.STRING })
   declare discordId: string;
-
-  @AllowNull(false)
-  @Column({ type: DataType.STRING })
-  declare type: UserType;
 
   // # Leveling
   @Default(1)

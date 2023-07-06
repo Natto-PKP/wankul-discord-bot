@@ -3,23 +3,27 @@ import {
 } from 'sequelize-typescript';
 import { CoreModel, CoreModelInterface } from './CoreModel';
 import { UserModel, UserMatchModel } from '.';
+import IdentifierService from '../utils/IdentifierUtil';
 
-export interface MatchModelInterface extends CoreModelInterface {
+export type MatchData = {
   identifier: string;
 
   isCompetitive: boolean;
   isDraw: boolean;
   isCanceled: boolean;
   isFinished: boolean;
+};
 
+export type MatchModelInterface = CoreModelInterface & MatchData & {
   // # Players
   players: UserModel[];
-}
+};
 
 @Table({ tableName: 'matches' })
 export class MatchModel extends CoreModel implements MatchModelInterface {
   @Unique
   @AllowNull(false)
+  @Default(() => IdentifierService.generate({ characters: ['lower'], length: 7 }))
   @Column({ type: DataType.STRING })
   declare identifier: string;
 

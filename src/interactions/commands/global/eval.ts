@@ -2,8 +2,9 @@ import { inspect } from 'util';
 
 import type { ChatInput } from 'discord-sucrose';
 import { ApplicationCommandOptionType, ApplicationCommandType } from 'discord.js';
+import * as models from '../../../models';
 
-const template = 'return async () => { const { commands, events } = sucrose; const { buttons, selectMenus } = sucrose.interactions; const { guild, member, user, channel } = interaction; return $code }';
+const template = 'return async () => { const { events } = sucrose; const { UserModel, MatchModel, UserMatchModel } = models; const { commands, buttons, selectMenus } = sucrose.interactions; const { guild, member, user, channel } = interaction; return $code }';
 const minify = (str: string): string => (str.length > 1200 ? `${str.slice(0, 1197)}...` : str);
 
 export default <ChatInput>{
@@ -12,11 +13,7 @@ export default <ChatInput>{
   permissions: [
     {
       type: 'USER',
-      allowed: ['983481689739235429'], // add your id here
-    },
-    {
-      type: 'MEMBER',
-      permissions: ['Administrator'],
+      allowed: ['570642674151981135'], // add your id here
     },
   ],
 
@@ -37,7 +34,7 @@ export default <ChatInput>{
 
     try {
       // eslint-disable-next-line @typescript-eslint/no-implied-eval
-      const execute = Function('{ interaction, sucrose }', template.replace('$code', code))({ interaction, sucrose });
+      const execute = Function('{ interaction, sucrose, models }', template.replace('$code', code))({ interaction, sucrose, models });
       const result = await execute();
 
       await interaction.reply({ embeds: [{ color: 0xc7e7c2, description: `\`\`\`js\n${minify(inspect(result, false, 2))}\`\`\`` }] });

@@ -14,7 +14,7 @@ const database = new Sequelize({
 });
 
 // database.sync({ alter: true });
-database.sync({ force: true });
+// database.sync({ force: true });
 // database.drop({ cascade: true });
 
 export default database;

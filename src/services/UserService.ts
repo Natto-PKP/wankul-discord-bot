@@ -1,7 +1,14 @@
 import { UserModel, type UserData } from '../models';
+import type { PaginationOptions } from '../utils/PaginationUtil';
+import PaginationUtil from '../utils/PaginationUtil';
 
 type UserCreateData = Pick<UserData, 'discordId'>;
 type UserUpdateData = Partial<Omit<UserData, 'discordId' | 'identifier'>>;
+
+export enum UserType {
+  Player = 'PLAYER',
+  Collector = 'COLLECTOR',
+}
 
 export default class UserService {
   /**
@@ -18,7 +25,7 @@ export default class UserService {
    * @param discordId - discord id
    * @returns the found user
    */
-  static async findByDiscordId(discordId: string) {
+  static async getByDiscordId(discordId: string) {
     return UserModel.findOne({ where: { discordId } });
   }
 
@@ -27,16 +34,29 @@ export default class UserService {
    * @param identifier - identifier
    * @returns the found user
    */
-  static async findByIdentifier(identifier: string) {
+  static async getByIdentifier(identifier: string) {
     return UserModel.findOne({ where: { identifier } });
+  }
+
+  /**
+   * find a user by id
+   * @param id - user id
+   * @returns the found user
+   */
+  static async get(id: string) {
+    return UserModel.findByPk(id);
   }
 
   /**
    * find all users
    * @returns - all users
    */
-  static async findAll() {
-    return UserModel.findAll();
+  static async getAll(pagination: PaginationOptions = {}) {
+    const limit = PaginationUtil.getLimit(pagination.limit);
+    const page = PaginationUtil.getPage(pagination.page);
+    const offset = PaginationUtil.calcOffset(page, limit);
+
+    return UserModel.findAll({ limit, offset });
   }
 
   /**

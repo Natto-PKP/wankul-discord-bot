@@ -17,8 +17,10 @@
   },
   "homepage": "https://github.com/Natto-PKP/wankul-discord-bot#readme",
   "dependencies": {
+    "canvas": "^2.11.2",
+    "dayjs": "^1.11.9",
     "discord-sucrose": "^7.0.1",
-    "discord.js": "^14.8.0",
+    "discord.js": "^14.11.0",
     "dotenv": "^16.3.1",
     "nodemon": "^2.0.22",
     "pg": "^8.11.0",
