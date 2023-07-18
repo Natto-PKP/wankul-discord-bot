@@ -2,6 +2,8 @@ import type { ChatInput } from 'discord-sucrose';
 import { langs } from '../../../translations/TranslationService';
 
 export default <ChatInput>{
+  permissions: { type: 'GUILD_ONLY' },
+
   cooldowns: {
     type: 'USER',
     label: 'global',

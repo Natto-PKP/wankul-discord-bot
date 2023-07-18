@@ -6,7 +6,7 @@ import './database';
 
 import Cooldown from './services/Cooldown';
 
-Sucrose.build({
+export default Sucrose.build({
   env: { ext: 'ts', source: 'src' },
   intents: [GatewayIntentBits.Guilds],
   partials: [Partials.Channel],

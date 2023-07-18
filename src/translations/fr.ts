@@ -32,12 +32,25 @@ export default {
 
     record: {
       body: {
-        name: 'enregistrer',
+        name: 'enregistrement',
         description: 'Enregistre un match entre toi et un autre utilisateur',
         options: {
           player: {
             name: 'joueur',
             description: 'Le joueur que tu as défié',
+          },
+          state: {
+            name: 'issue',
+            description: 'L\'issue du match',
+            choices: {
+              win: 'Victoire',
+              loose: 'Défaite',
+              draw: 'Match nul',
+            },
+          },
+          challenger: {
+            name: 'challengeur',
+            description: 'Le joueur qui a défié',
           },
           winner: {
             name: 'vainqueur',
@@ -53,7 +66,16 @@ export default {
       content: 'Enregistrement d\'un match entre {{player}} et {{user}}...',
       verification: {
         title: 'Vérification',
-        description: '<@{{looser}}>, confirmes-tu que <@{{winner}}> a gagné le match ?',
+        competitiveTitle: 'Vérification d\'un match compétitif',
+        descriptions: {
+          win: '{{opponent}} a t\'il/elle bien perdu.e contre {{challenger}} ?',
+          loose: '{{opponent}} a t\'il/elle bien gagné.e contre {{challenger}} ?',
+          draw: '{{opponent}} a t\'il/elle bien fait match nul contre {{challenger}} ?',
+        },
+        footer: {
+          single: "L'opponent doit répondre avec oui ou non",
+          both: 'Les deux joueurs doivent répondre avec oui ou non',
+        },
         components: {
           yes: 'Oui',
           no: 'Non',
@@ -66,6 +88,9 @@ export default {
       winnerNotInMatch: 'Le vainqueur doit être l\'un des deux joueurs',
       playerNotRegistered: 'Le joueur n\'est pas enregistré',
       userNotRegistered: 'Tu n\'es pas enregistré',
+      timeout: 'Le temps de réponse est écoulé',
+      registered: 'Le match a été enregistré',
+      notRegistered: 'Le match n\'a pas été enregistré',
 
       success: 'Le match a été enregistré',
       failed: 'Le match n\'a pas été enregistré',
@@ -85,6 +110,7 @@ export default {
 
       list: {
         description: 'Historique des matchs de {{player}}',
+        gamesLeft: '{{count}} matchs restants',
         victory: 'Victoire',
         defeat: 'Défaite',
         competitive: 'Compétitif',
@@ -109,6 +135,19 @@ export default {
 
       playerNotRegistered: 'Le joueur n\'est pas enregistré',
 
+    },
+
+    scoreboard: {
+      body: {
+        name: 'classement',
+        description: 'Affiche le classement',
+        options: {
+          global: {
+            name: 'global',
+            description: 'Affiche le classement global',
+          },
+        },
+      },
     },
   },
 };

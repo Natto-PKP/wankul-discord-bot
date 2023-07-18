@@ -1,6 +1,9 @@
 import { BaseCooldownManager, CooldownMethodParams, CooldownValue } from 'discord-sucrose';
+import cron from 'node-cron';
 
 const cache = new Map<string, CooldownValue>();
+
+cron.schedule('0 4 * * *', () => cache.clear());
 
 class Cooldown extends BaseCooldownManager<typeof cache> {
   constructor() {
@@ -12,6 +15,8 @@ class Cooldown extends BaseCooldownManager<typeof cache> {
   }
 
   public override async set({ key, value, stack }: CooldownMethodParams & CooldownValue) {
+    console.log('set', key, value, stack);
+    // ! COOLDOWN CASSER, REPARER LE PACKAGE
     this.cache.set(key, { value, stack });
   }
 }

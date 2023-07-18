@@ -10,8 +10,6 @@ export type MatchData = {
 
   isCompetitive: boolean;
   isDraw: boolean;
-  isCanceled: boolean;
-  isFinished: boolean;
 };
 
 export type MatchModelInterface = CoreModelInterface & MatchData & {
@@ -31,16 +29,6 @@ export class MatchModel extends CoreModel implements MatchModelInterface {
   @Default(false)
   @Column({ type: DataType.BOOLEAN })
   declare isCompetitive: boolean;
-
-  @AllowNull(false)
-  @Default(false)
-  @Column({ type: DataType.BOOLEAN })
-  declare isCanceled: boolean;
-
-  @AllowNull(false)
-  @Default(false)
-  @Column({ type: DataType.BOOLEAN })
-  declare isFinished: boolean;
 
   @AllowNull(false)
   @Default(false)

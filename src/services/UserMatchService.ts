@@ -1,4 +1,4 @@
-import type { Includeable } from 'sequelize';
+import type { CreateOptions, DestroyOptions, Includeable } from 'sequelize';
 import { UserMatchModel, UserMatchData } from '../models';
 import PaginationUtil, { PaginationOptions } from '../utils/PaginationUtil';
 
@@ -12,8 +12,13 @@ export default class UserMatchService {
    * @param body - match data
    * @returns the created match
    */
-  static async add(userId: string, matchId: string, body: UserMatchCreateData) {
-    return UserMatchModel.create({ userId, matchId, ...body });
+  static async add(
+    userId: string,
+    matchId: string,
+    body: UserMatchCreateData,
+    options?: CreateOptions<any>,
+  ) {
+    return UserMatchModel.create({ userId, matchId, ...body }, options);
   }
 
   /**
@@ -22,8 +27,8 @@ export default class UserMatchService {
    * @param matchId - match id
    * @returns the removed match
    */
-  static async remove(userId: string, matchId: string) {
-    return UserMatchModel.destroy({ where: { userId, matchId } });
+  static async remove(userId: string, matchId: string, options?: DestroyOptions<any>) {
+    return UserMatchModel.destroy({ where: { userId, matchId }, ...options });
   }
 
   /**

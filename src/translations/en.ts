@@ -36,8 +36,21 @@ export default {
         description: 'Record a match between you and another user',
         options: {
           player: {
-            name: 'player',
+            name: 'opponent',
             description: 'The player you challenged',
+          },
+          state: {
+            name: 'state',
+            description: 'The state of the match',
+            choices: {
+              win: 'Victory',
+              loose: 'Defeat',
+              draw: 'Draw',
+            },
+          },
+          challenger: {
+            name: 'challenger',
+            description: 'The player who challenged',
           },
           winner: {
             name: 'winner',
@@ -53,7 +66,16 @@ export default {
       content: 'Recording a match between {{player}} and {{user}}...',
       verification: {
         title: 'Verification',
-        description: '<@{{looser}}>, do you confirm that <@{{winner}}> won the match?',
+        competitiveTitle: 'Verification of a competitive match',
+        descriptions: {
+          win: '{{opponent}} did he/she really loose against {{challenger}} ?',
+          loose: '{{opponent}} did he/she really win against {{challenger}} ?',
+          draw: '{{opponent}} did he/she really draw against {{challenger}} ?',
+        },
+        footer: {
+          single: 'The opponent must answer with yes or no',
+          both: 'Both players must answer with yes or no',
+        },
         components: {
           yes: 'Yes',
           no: 'No',
@@ -66,6 +88,9 @@ export default {
       winnerNotInMatch: 'The winner is not in the match',
       playerNotRegistered: 'The player is not registered',
       userNotRegistered: 'The user is not registered',
+      timeout: 'answer not received in time',
+      registered: 'The match has been recorded',
+      notRegistered: 'The match has not been recorded',
 
       success: 'The match has been recorded',
       failed: 'The match has not been recorded',
@@ -85,6 +110,7 @@ export default {
 
       list: {
         description: 'Match history of {{player}}',
+        gamesLeft: '{{count}} games left',
         victory: 'Victory',
         defeat: 'Defeat',
         competitive: 'Competitive',
@@ -108,6 +134,19 @@ export default {
       },
 
       playerNotRegistered: 'The player is not registered',
+    },
+
+    scoreboard: {
+      body: {
+        name: 'scoreboard',
+        description: 'Display the scoreboard of a user',
+        options: {
+          global: {
+            name: 'global',
+            description: 'Display the global scoreboard',
+          },
+        },
+      },
     },
   },
 };

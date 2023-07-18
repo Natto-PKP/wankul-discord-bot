@@ -4,7 +4,7 @@ import type { ChatInput } from 'discord-sucrose';
 import { ApplicationCommandOptionType, ApplicationCommandType } from 'discord.js';
 import * as models from '../../../models';
 
-const template = 'return async () => { const { events } = sucrose; const { UserModel, MatchModel, UserMatchModel } = models; const { commands, buttons, selectMenus } = sucrose.interactions; const { guild, member, user, channel } = interaction; return $code }';
+const template = 'return async () => { const { events, cooldown } = sucrose; const { UserModel, MatchModel, UserMatchModel } = models; const { commands, buttons, selectMenus } = sucrose.interactions; const { guild, member, user, channel } = interaction; return $code }';
 const minify = (str: string): string => (str.length > 1200 ? `${str.slice(0, 1197)}...` : str);
 
 export default <ChatInput>{

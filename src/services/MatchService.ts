@@ -1,3 +1,4 @@
+import type { CreateOptions } from 'sequelize';
 import { MatchModel, type MatchData } from '../models';
 import type { PaginationOptions } from '../utils/PaginationUtil';
 import PaginationUtil from '../utils/PaginationUtil';
@@ -10,8 +11,8 @@ export default class MatchService {
    * @param data - match data
    * @returns the created match
    */
-  static async create(data: MatchCreateData) {
-    return MatchModel.create(data);
+  static async create(data: MatchCreateData, options?: CreateOptions<any>) {
+    return MatchModel.create(data, options);
   }
 
   /**

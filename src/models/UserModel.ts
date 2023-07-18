@@ -4,6 +4,7 @@ import {
   Column,
   DataType,
   Default,
+  Index,
   Table,
   Unique,
 } from 'sequelize-typescript';
@@ -63,6 +64,7 @@ export class UserModel extends CoreModel implements UserModelInterface {
   declare experience: number;
 
   // # Rating
+  @Index
   @Default(0)
   @AllowNull(false)
   @Column({ type: DataType.INTEGER })

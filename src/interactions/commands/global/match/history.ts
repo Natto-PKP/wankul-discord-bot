@@ -21,6 +21,8 @@ dayjs.extend(relativeTime);
 const MATCHES_PER_PAGE = 10;
 
 export default <ChatInputSubOption>{
+  permissions: { type: 'GUILD_ONLY' },
+
   body: {
     name: langs.en.match.history.body.name,
     nameLocalizations: { fr: langs.fr.match.history.body.name },
